@@ -10,9 +10,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Utiliser la clé secrète
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Base de données
 
-
-app = Flask(__name__)
-
 def init_db():
     with sqlite3.connect("database.db") as conn:
         cursor = conn.cursor()
@@ -35,7 +32,7 @@ def init_db():
         ''')
         conn.commit()
 
-@app.route('/')
+@app.route('/formulaire')
 def formulaire():
     return render_template("form.html")
 
@@ -71,4 +68,6 @@ def thankyou():
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    
+    # Configurer le serveur Flask pour qu'il écoute sur un port dynamique fourni par Render
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

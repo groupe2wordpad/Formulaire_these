@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 from dotenv import load_dotenv
 import os
+from waitress import serve  # Importer Waitress
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
@@ -13,7 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Base de don
 def init_db():
     with sqlite3.connect("database.db") as conn:
         cursor = conn.cursor()
-        cursor.execute('''
+        cursor.execute(''' 
             CREATE TABLE IF NOT EXISTS reponses (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nom TEXT,
@@ -54,7 +55,7 @@ def submit():
     
     with sqlite3.connect("database.db") as conn:
         cursor = conn.cursor()
-        cursor.execute('''
+        cursor.execute(''' 
             INSERT INTO reponses (nom, prenom, age, profession, niveau_cybersecurite, attaque, type_attaque, vpn, donnees, fuite, commentaire, accord_these)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', data)
@@ -68,6 +69,6 @@ def thankyou():
 
 if __name__ == '__main__':
     init_db()
-    
-    # Configurer le serveur Flask pour qu'il écoute sur un port dynamique fourni par Render
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
+    # Utiliser Waitress pour le déploiement en production
+    serve(app, host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))  # Le port 10000 peut être changé si nécessaire

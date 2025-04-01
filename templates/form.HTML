@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Collecte de Données</title>
+    <style>
+        /* Reset des marges et padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff6600;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+            color: #444;
+        }
+
+        input[type="text"], input[type="email"], textarea, select, input[type="number"], input[type="radio"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            background-color: #f8f8f8;
+        }
+
+        input[type="radio"] {
+            width: auto;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+            border-color: #ff6600;
+            outline: none;
+        }
+        h3{
+            margin: 2% 0% 2% 0%;
+            
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6600;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Formulaire de Collecte de Données</h2>
+        <form action="/submit" method="POST">
+            <!-- Informations Générales -->
+            <h3>📌 Informations Générales</h3>
+            <div>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required>
+            </div>
+    
+            <div>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+            </div>
+    
+            <div>
+                <label for="age">Âge</label>
+                <input type="number" id="age" name="age" placeholder="Entrez votre âge" required>
+            </div>
+    
+            <div>
+                <label for="profession">Profession</label>
+                <select id="profession" name="profession" required>
+                    <option value="etudiant">Étudiant</option>
+                    <option value="enseignant">Enseignant</option>
+                    <option value="ingenieur">Ingénieur</option>
+                    <option value="administrateur">Administrateur</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </div>
+    
+            <!-- Connaissances en Cybersécurité -->
+            <h3>📌 Connaissances en cybersécurité</h3>
+            <div>
+                <label for="niveau-cybersecurite">Niveau en cybersécurité</label>
+                <select id="niveau-cybersecurite" name="niveau_cybersecurite" required>
+                    <option value="debutant">Débutant</option>
+                    <option value="intermediaire">Intermédiaire</option>
+                    <option value="avance">Avancé</option>
+                </select>
+            </div>
+    
+            <div>
+                <label>As-tu déjà été victime d’une cyberattaque ?</label>
+                <input type="radio" id="attaque-oui" name="attaque" value="oui" required> Oui
+                <input type="radio" id="attaque-non" name="attaque" value="non" required> Non
+            </div>
+    
+            <div>
+                <label for="type-attaque">Type d'attaque rencontrée (si oui)</label>
+                <input type="text" id="type-attaque" name="type_attaque" placeholder="Décrire le type d'attaque">
+            </div>
+    
+            <!-- Utilisation des outils numériques -->
+            <h3>📌 Utilisation des outils numériques</h3>
+            <div>
+                <label>Utilises-tu un VPN ?</label>
+                <input type="radio" id="vpn-oui" name="vpn" value="oui" required> Oui
+                <input type="radio" id="vpn-non" name="vpn" value="non" required> Non
+            </div>
+    
+            <div>
+                <label>Stockes-tu des données sensibles en ligne ?</label>
+                <input type="radio" id="donnees-oui" name="donnees" value="oui" required> Oui
+                <input type="radio" id="donnees-non" name="donnees" value="non" required> Non
+            </div>
+    
+            <div>
+                <label>As-tu déjà eu une fuite de données ?</label>
+                <input type="radio" id="fuite-oui" name="fuite" value="oui" required> Oui
+                <input type="radio" id="fuite-non" name="fuite" value="non" required> Non
+            </div>
+    
+            <!-- Commentaires -->
+            <div>
+                <label for="commentaire">Commentaires supplémentaires</label>
+                <textarea id="commentaire" name="commentaire" rows="4" placeholder="Ajouter des commentaires..."></textarea>
+            </div>
+    
+            <div>
+                <label>Es-tu d'accord pour que tes réponses soient utilisées dans le cadre d'un projet de thèse ?</label>
+                <input type="radio" id="consentement" name="accord_these" value="oui" required> Oui
+                <input type="radio" id="consentement" name="accord_these" value="non" required> Non
+            </div>
+    
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+    
+
+</body>
+</html>

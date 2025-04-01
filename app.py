@@ -1,5 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+from dotenv import load_dotenv
+import os
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Utiliser la clé secrète
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Base de données
+
 
 app = Flask(__name__)
 
@@ -58,14 +68,6 @@ def submit():
 @app.route('/thankyou')
 def thankyou():
     return render_template("thankyou.html")
-
-@app.route('/reponses')
-def voir_reponses():
-    with sqlite3.connect("database.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM reponses")
-        reponses = cursor.fetchall()
-    return {"reponses": reponses}
 
 if __name__ == '__main__':
     init_db()

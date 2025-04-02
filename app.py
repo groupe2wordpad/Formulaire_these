@@ -71,4 +71,4 @@ if __name__ == '__main__':
     init_db()
 
     # Utiliser Waitress pour le déploiement en production
-    serve(app, host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))  # Le port 10000 peut être changé si nécessaire
+    serve(app, host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))  # Le port 10000 peut être changé si nécessaire

@@ -32,7 +32,7 @@ def init_db():
         ''')
         conn.commit()
 
-@app.route('/formulaire')
+@app.route('/form')
 def formulaire():
     return render_template("form.html")
 

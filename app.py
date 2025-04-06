@@ -32,9 +32,11 @@ def init_db():
         ''')
         conn.commit()
 
-@app.route('/form')
+@app.route('/')  # recuperer le formulaire 
 def form():
     return render_template("form.html")
+
+# traiter les données recu par le formulaire
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -47,7 +49,7 @@ def submit():
     data = (
         request.form['nom'], request.form['prenom'], request.form['age'],
         request.form['profession'], request.form['niveau_cybersecurite'],
-        request.form['attaque'], request.form.get('type_attaque', ''),
+        request.form['attaque'], request.form.get('type_attaque', ''), 
         request.form['vpn'], request.form['donnees'], request.form['fuite'],
         request.form.get('commentaire', ''), accord_these
     )

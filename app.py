@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 from dotenv import load_dotenv
 import os
-from waitress import serve  # Importer Waitress
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
@@ -67,8 +66,9 @@ def submit():
 def thankyou():
     return render_template("thankyou.html")
 
-if __name__ == '__main__':
-    init_db()
+# Initialisation de la base de données au démarrage
+init_db()
 
-    # Utiliser Waitress pour le déploiement en production
-    serve(app, host='0.0.0.0', port=int(os.environ.get("PORT", 8000)))  # Le port 10000 peut être changé si nécessaire
+if __name__ == '__main__':
+    # Pour les tests en local uniquement
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8000)))

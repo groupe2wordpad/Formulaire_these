@@ -32,8 +32,8 @@ def init_db():
         ''')
         conn.commit()
 
-@app.route('/formulaire')
-def formulaire():
+@app.route('/form')
+def form():
     return render_template("form.html")
 
 @app.route('/submit', methods=['POST'])
